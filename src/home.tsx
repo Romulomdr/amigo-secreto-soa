@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Confetti from "react-confetti";
@@ -12,7 +12,7 @@ export default function Home() {
 
   const [token, setToken] = useState("");
   const [result, setResult] = useState<{ nome: string; email: string } | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const startAnimation = () => {
     setShowPlay(false);
@@ -101,9 +101,10 @@ export default function Home() {
 
             <button
               onClick={revelar}
-              className="border border-white px-4 py-2 hover:bg-white hover:text-black transition"
+              disabled={loading}
+              className={`border border-white px-4 py-2 transition ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white hover:text-black'}`}
             >
-              Revelar Amigo Secreto
+              {loading ? "Revelando..." : "Revelar Amigo Secreto"}
             </button>
           </motion.div>
         )}
